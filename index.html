@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hi, my name is Chris. I am a developer expanding knowledge on full-stack development skills to create accessible, cohesive, and responsive applications.">
+    <title>Chris Hackett - Full Stack Developer</title>
+    <link href="css/rpgui.css" rel="stylesheet" type="text/css">
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
+</head>
+<body>
+    <main class="rpgui-content" x-data="redirect()">
+        <div x-bind:class="getContainer()" class="rpgui-container">
+            <div x-show="!isLinked()">
+                <h1>Chris Hackett</h1>
+                <h2>Full Stack Developer</h2>
+                <section>
+                    <p>
+                        Welcome traveler! You've reached my personal portfolio. While the internet can be a scary place,
+                        I assure you that if you're interested in learning more about me, I'll point you in the right direction!
+                    </p>
+                    <div class="button-group">
+                        <button class="rpgui-button"
+                                @click="send('https://cv.chrish.me', 'CV/Resume')">CV/Resume</button>
+                        <button class="rpgui-button"
+                                @click="send('https://blog.chrish.me', 'Blog')">Blog</button>
+                        <button class="rpgui-button"
+                                @click="send('https://github.com/chx2', 'GitHub')">GitHub</button>
+                    </div>
+                </section>
+            </div>
+
+            <div class="redirect" x-show="isLinked()">
+                <h2 x-text="text"></h2>
+                <i class="rpgui-icon shield float"></i>
+                <div class="quote">
+                    <p x-text="quote"></p>
+                    <p x-text="author"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        function redirect() {
+            return {
+                containers: ['framed', 'framed-golden', 'framed-golden-2'],
+                container: '',
+                linked: false,
+                text: 'Taking you somewhere eventually...',
+                quote: 'Inspiring Quote',
+                author: 'Dashing Author',
+                setContainer() {
+                    return this.containers[Math.floor((Math.random() * this.containers.length))]
+                },
+                getContainer() {
+                    if (this.container === '') {
+                        this.container = this.setContainer()
+                    }
+                    return this.container
+                },
+                isLinked() {
+                    return this.linked
+                },
+                send(link, name) {
+                    this.query()
+                    this.linked = true
+                    this.text = 'Taking you to my ' + name + '...'
+                    window.setTimeout(function(){
+                        window.location.href = link
+                    }, 6000)
+                },
+                query() {
+                    fetch('https://api.quotable.io/random?maxLength=64')
+                        .then(res => res.json())
+                        .then(data => {
+                            this.quote = data.content
+                            this.author = '- ' + data.author
+                        })
+                }
+            }
+        }
+    </script>
+</body>
+</html>
