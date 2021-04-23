@@ -11,7 +11,7 @@
 </head>
 <body>
     <main class="rpgui-content" x-data="redirect()">
-        <div x-bind:class="getContainer()" class="rpgui-container">
+        <div class="rpgui-container framed">
             <div x-show="!isLinked()">
                 <h1>Chris Hackett</h1>
                 <h2>Full Stack Developer</h2>
@@ -44,21 +44,10 @@
     <script>
         function redirect() {
             return {
-                containers: ['framed', 'framed-golden', 'framed-golden-2'],
-                container: '',
                 linked: false,
                 text: 'Taking you somewhere eventually...',
                 quote: 'Inspiring Quote',
                 author: 'Dashing Author',
-                setContainer() {
-                    return this.containers[Math.floor((Math.random() * this.containers.length))]
-                },
-                getContainer() {
-                    if (this.container === '') {
-                        this.container = this.setContainer()
-                    }
-                    return this.container
-                },
                 isLinked() {
                     return this.linked
                 },

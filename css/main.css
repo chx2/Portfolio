@@ -10,6 +10,8 @@ Mix things up a bit.
     flex-direction: column;
 }
 .rpgui-container {
+    min-height: 300px;
+    width: 600px;
     max-width: 600px;
 }
 .framed, .framed-golden, .framed-golden-2 {
