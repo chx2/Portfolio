@@ -12,7 +12,7 @@ Mix things up a bit.
 .rpgui-container {
     min-height: 300px;
     width: 600px;
-    max-width: 600px;
+    max-width: 100%;
 }
 .framed, .framed-golden, .framed-golden-2 {
     animation-name: fadeInUp;
